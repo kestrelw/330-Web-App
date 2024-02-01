@@ -18,7 +18,7 @@ function Display(){
 }
 
 function init(){
-    document.querySelector("#myButton").addEventListener("click",Display);
+    document.querySelector("#myButton").addEventListener("click",Display);   
 }
 
 window.onload = init;
