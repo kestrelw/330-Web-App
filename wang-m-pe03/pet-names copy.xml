@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<greeter-data>
+    <app-title>Greeter</app-title>
+    <greetinglist>
+      Hi,Hello,Hey there
+    </greetinglist>
+</greeter-data>
