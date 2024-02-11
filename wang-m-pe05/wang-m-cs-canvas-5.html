@@ -70,6 +70,7 @@
       // ctx.closePath();
       // ctx.fill();
       // ctx.stroke();
+      drawLine(ctx,0,0,650, 500,20,getRandomColor());
 
       setupUI();
       update();
@@ -131,9 +132,9 @@
         let radius = getRandomInt(10, 30);
         let startAngle = 0;
         let endAngle = Math.PI * getRandomInt(0,2);
-        drawRectangle(ctx, x, y, width, height, color);
+        //drawRectangle(ctx, x, y, width, height, color);
         //drawRectangle(ctx, 90, 90, 90, 90, "red");
-        //drawArc(ctx, x, y, radius, color, startAngle, endAngle);
+        drawArc(ctx, x, y, radius, color, startAngle, endAngle);
         
       }      
     }
