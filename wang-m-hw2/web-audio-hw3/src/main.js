@@ -25,7 +25,7 @@ const DEFAULTS = Object.freeze({
 	sound1  :  "media/New Adventure Theme.mp3"
 });
 
-function init(){
+const init = () => {
 	console.log("init called");
 	console.log(`Testing utils.getRandomColor() import: ${utils.getRandomColor()}`);
   audio.setupWebaudio(DEFAULTS.sound1);
@@ -34,7 +34,7 @@ function init(){
   setupUI(canvasElement);
 }
 
-function setupUI(canvasElement){
+const setupUI = (canvasElement) => {
   // A - hookup fullscreen button
   const fsButton = document.querySelector("#fs-button");
 	
@@ -110,7 +110,7 @@ function setupUI(canvasElement){
   loop();
 } // end setupUI
 
-function loop(){
+const loop = () => {
   // /* NOTE: This is temporary testing code that we will delete in Part II */
      requestAnimationFrame(loop);
   //   // 1) create a byte array (values of 0-255) to hold the audio data
