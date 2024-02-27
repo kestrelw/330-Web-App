@@ -36,13 +36,15 @@ function init(){
 
 function setupUI(canvasElement){
   // A - hookup fullscreen button
-  const fsButton = document.querySelector("#fsButton");
+  const fsButton = document.querySelector("#fs-button");
 	
   // add .onclick event to button
   fsButton.onclick = e => {
     console.log("goFullscreen() called");
     utils.goFullscreen(canvasElement);
   };
+
+  const playButton = document.querySelector("#play-button");
 
   //onclick play button
   playButton.onclick = e => {
@@ -64,23 +66,23 @@ function setupUI(canvasElement){
       e.target.dataset.playing = "no"
     }
 
-    document.querySelector("#gradientCB").onclick = (e) => {drawParams.showGradient = e.target.checked;}
+    document.querySelector("#gradient-cb").onclick = (e) => {drawParams.showGradient = e.target.checked;}
 
-    document.querySelector("#barsCB").onclick = (e) => {drawParams.showBars = e.target.checked;}
+    document.querySelector("#bars-cb").onclick = (e) => {drawParams.showBars = e.target.checked;}
 
-    document.querySelector("#circlesCB").onclick = (e) => {drawParams.showCircles = e.target.checked;}
+    document.querySelector("#circles-cb").onclick = (e) => {drawParams.showCircles = e.target.checked;}
 
-    document.querySelector("#noiseCB").onclick = (e) => {drawParams.showNoise = e.target.checked;}
+    document.querySelector("#noise-cb").onclick = (e) => {drawParams.showNoise = e.target.checked;}
 
-    document.querySelector("#invertCB").onclick = (e) => {drawParams.showInvert = e.target.checked;}
+    document.querySelector("#invert-cb").onclick = (e) => {drawParams.showInvert = e.target.checked;}
 
-    document.querySelector("#embossCB").onclick = (e) => {drawParams.showEmboss = e.target.checked;}
+    document.querySelector("#emboss-cb").onclick = (e) => {drawParams.showEmboss = e.target.checked;}
 
   };
 
   //C - vol sider and label
-  let VolumeSlider = document.querySelector("#voumeSlider");
-  let volumeLabel = document.querySelector("#volumeLabel");
+  let volumeSlider = document.querySelector("#volume-slider");
+  let volumeLabel = document.querySelector("#volume-label");
 
   //add .oninput
   volumeSlider.oninput = e => {
