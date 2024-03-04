@@ -50,3 +50,7 @@ span{
 #slider-distortion{
   position:relative;top:.7em;
 }
+
+*{font-family:sans-serif;}
+span{margin-right:2em;}
+#slider-distortion{position:relative;top:.7em;}

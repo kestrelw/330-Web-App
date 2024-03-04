@@ -20,6 +20,8 @@ const drawParams = {
   showEmboss : false
 };
 
+let visualization = true;
+
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
 	sound1  :  "media/New Adventure Theme.mp3"
@@ -37,6 +39,10 @@ const init = () => {
 const setupUI = (canvasElement) => {
   // A - hookup fullscreen button
   const fsButton = document.querySelector("#fs-button");
+
+  //set the initial state of the high shelf checkbox
+  document.querySelector('#cb-highshelf').checked = audio.highshelf; // `highshelf` is a boolean we will declare in a second
+	document.querySelector('#cb-lowshelf').checked = audio.lowshelf;
 	
   // add .onclick event to button
   fsButton.onclick = e => {
@@ -50,7 +56,7 @@ const setupUI = (canvasElement) => {
   playButton.onclick = e => {
     console.log(`audioCtx.state before = ${audio.audioCtx.state}`);
 
-    //context suspended state?
+    //context suspended state?  
     if(audio.audioCtx.state == "suspended"){
       audio.audioCtx.resume();
     }
@@ -77,6 +83,13 @@ const setupUI = (canvasElement) => {
     document.querySelector("#invert-cb").onclick = (e) => {drawParams.showInvert = e.target.checked;}
 
     document.querySelector("#emboss-cb").onclick = (e) => {drawParams.showEmboss = e.target.checked;}
+
+    document.querySelector('#cb-highshelf').onclick = (e) => {audio.toggleHighshelf();};
+
+		document.querySelector('#cb-lowshelf').onclick = (e) => {audio.toggleLowshelf();};
+
+    audio.toggleHighshelf(); // when the app starts up, turn on or turn off the filter, depending on the value of `highshelf`!
+		audio.toggleLowshelf();
 
   };
 
@@ -106,41 +119,26 @@ const setupUI = (canvasElement) => {
       playButton.dispatchEvent (new MouseEvent("click"));
     }
   };
-	
+
+  let visualSelect= document.querySelector("#visual-select");
+  //add .onchange
+  visualSelect.onchange = e => {
+    visualization = !visualization;
+    console.log(visualization);
+  };
+
+  
+  
   loop();
 } // end setupUI
 
 const loop = () => {
   // /* NOTE: This is temporary testing code that we will delete in Part II */
      requestAnimationFrame(loop);
-  //   // 1) create a byte array (values of 0-255) to hold the audio data
-  //   // normally, we do this once when the program starts up, NOT every frame
-  //   let audioData = new Uint8Array(audio.analyserNode.fftSize/2);
-    
-  //   // 2) populate the array of audio data *by reference* (i.e. by its address)
-  //   audio.analyserNode.getByteFrequencyData(audioData);
-  //   //audio.analyserNode.getByteTimeDomainData(data); // waveform data
 
-    
-  //   // 3) log out the array and the average loudness (amplitude) of all of the frequency bins
-  //     console.log(audioData);
-      
-  //     console.log("-----Audio Stats-----");
-  //     let totalLoudness =  audioData.reduce((total,num) => total + num);
-  //     let averageLoudness =  totalLoudness/(audio.analyserNode.fftSize/2);
-  //     let minLoudness =  Math.min(...audioData); // ooh - the ES6 spread operator is handy!
-  //     let maxLoudness =  Math.max(...audioData); // ditto!
-  //     // Now look at loudness in a specific bin
-  //     // 22050 kHz divided by 128 bins = 172.23 kHz per bin
-  //     // the 12th element in array represents loudness at 2.067 kHz
-  //     let loudnessAt2K = audioData[11]; 
-  //     console.log(`averageLoudness = ${averageLoudness}`);
-  //     console.log(`minLoudness = ${minLoudness}`);
-  //     console.log(`maxLoudness = ${maxLoudness}`);
-  //     console.log(`loudnessAt2K = ${loudnessAt2K}`);
-  //     console.log("---------------------");
 
   canvas.draw(drawParams);
 }
 
-export {init};
+
+export {init, visualization};

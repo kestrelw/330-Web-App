@@ -21,6 +21,13 @@
           <option value="media/The Picard Song.mp3">The Picard Song</option>
         </select>
       </label>
+
+      <label>Audio Visualization: 
+        <select id="visual-select">
+          <option selected>Frequency Data</option>
+          <option >Waveform</option>
+        </select>
+      </label>
     </section>
 		
     <section>
@@ -28,7 +35,7 @@
       <span id="volume-label">???</span>
     </section>
 
-    <section>
+    <section id="visualization-options">
       <span><input type="checkbox" id="gradient-cb" checked><label for="gradient-cb">Show Gradient</label></span>
       <span><input type="checkbox" id="bars-cb" checked><label for="bars-cb">Show Bars</label></span>
       <span><input type="checkbox" id="circles-cb" checked><label for="circles-cb">Show Circles</label></span>
@@ -37,6 +44,13 @@
       <span><input type="checkbox" id="invert-cb"><label for="invert-cb">Invert Colors</label></span>
       <span><input type="checkbox" id="emboss-cb"><label for="emboss-cb">Show Emboss</label></span>
     </section>
+
+    <p>
+      <span><input type="checkbox" id="cb-highshelf"><label for="cb-highshelf">Highshelf Filter (Treble)</label></span>
+      <span><input type="checkbox" id="cb-lowshelf"><label for="cb-lowshelf">Lowshelf Filter (Bass)</label></span>
+      <!-- <span><label for="cb-distortion">Distortion</label><input type="checkbox" id="cb-distortion"></span>-->
+      <!-- <span>0 <input type="range" min="0" max="100" value="0" id="slider-distortion"> 100</span>-->
+    </p>
   </div>
 </main>
 </body>

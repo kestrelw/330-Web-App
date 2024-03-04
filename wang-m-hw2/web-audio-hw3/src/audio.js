@@ -1,6 +1,11 @@
 // 1 - our WebAudio context, **we will export and make this public at the bottom of the file**
 let audioCtx;
 
+let highshelf = false;
+let lowshelf = false;
+let biquadFilter;
+let lowShelfBiquadFilter;
+
 // **These are "private" properties - these will NOT be visible outside of this module (i.e. file)**
 // 2 - WebAudio nodes that are part of our WebAudio audio routing graph
 let element, sourceNode, analyserNode, gainNode;
@@ -30,6 +35,13 @@ const setupWebaudio = (filePath) => {
 // 4 - create an a source node that points at the <audio> element
     sourceNode = audioCtx.createMediaElementSource(element);
 
+    biquadFilter = audioCtx.createBiquadFilter();//ADDED STUFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+	biquadFilter.type = "highshelf";
+	// biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+	// biquadFilter.gain.setValueAtTime(20,audioCtx.currentTime);
+	lowShelfBiquadFilter = audioCtx.createBiquadFilter();
+	lowShelfBiquadFilter.type = "lowshelf";
+
 // 5 - create an analyser node
     analyserNode = audioCtx.createAnalyser();// note the UK spelling of "Analyser"
     
@@ -51,9 +63,32 @@ the amplitude of that frequency.
     gainNode.gain.calue = DEFAULTS.gain;
 
 // 8 - connect the nodes - we now have an audio graph
-    sourceNode.connect(analyserNode);
+    sourceNode.connect(biquadFilter);
+	biquadFilter.connect(lowShelfBiquadFilter);
+	lowShelfBiquadFilter.connect(analyserNode);
     analyserNode.connect(gainNode);
+
     gainNode.connect(audioCtx.destination);
+}
+
+const toggleHighshelf = () => {
+    highshelf = document.querySelector('#cb-highshelf').checked;
+    if(highshelf){
+        biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime); // we created the `biquadFilter` (i.e. "treble") node last time
+        biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
+    }else{
+        biquadFilter.gain.setValueAtTime(0, audioCtx.currentTime);
+    }
+}
+
+const toggleLowshelf = () => {
+    lowshelf = document.querySelector('#cb-lowshelf').checked;
+    if(lowshelf){
+        lowShelfBiquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+        lowShelfBiquadFilter.gain.setValueAtTime(15, audioCtx.currentTime);
+    }else{
+        lowShelfBiquadFilter.gain.setValueAtTime(0, audioCtx.currentTime);
+    }
 }
 
 const loadSoundFile = (filePath) => {
@@ -73,4 +108,6 @@ const setVolume = (value) => {
     gainNode.gain.value = value;
 }
 
-export{audioCtx, setupWebaudio, playCurrentSound, pauseCurrentSound, loadSoundFile, setVolume, analyserNode};
+
+
+export{audioCtx, setupWebaudio, playCurrentSound, pauseCurrentSound, loadSoundFile, setVolume, analyserNode, toggleHighshelf, toggleLowshelf, highshelf, lowshelf};
