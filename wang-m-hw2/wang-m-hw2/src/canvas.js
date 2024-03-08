@@ -11,12 +11,12 @@ import * as utils from './utils.js';
 import * as main from './main.js';
 import * as audio from './audio.js';
 
-let ctx,canvasWidth,canvasHeight,gradient,analyserNode,audioData;
+let ctx,canvasWidth,canvasHeight,/*gradient,*/analyserNode,audioData;
 
-const BAR_WIDTH = 24;
-const MAX_BAR_HEIGHT = 80;
+const BAR_WIDTH = 18;
+const MAX_BAR_HEIGHT = 60;
 const PADDING = 4;
-const MIDDLE_Y = canvasHeight/2;
+let MIDDLE_Y;
 
 const div = document.querySelector('controls')
 
@@ -25,16 +25,63 @@ const setupCanvas = (canvasElement,analyserNodeRef) => {
 	ctx = canvasElement.getContext("2d");
 	canvasWidth = canvasElement.width;
 	canvasHeight = canvasElement.height;
+
+    MIDDLE_Y = canvasHeight/2;
+
 	// create a gradient that runs top to bottom
-	gradient = utils.getLinearGradient(ctx,0,0,0,canvasHeight,[{percent:0,color:"#489EDB"},{percent:.25,color:"#2DCBDC"},{percent:.5,color:"#8048DB"},{percent:.75,color:"#4870DB"},{percent:1,color:"#25DBA1"}]);
+	//gradient = utils.getLinearGradient(ctx,0,0,0,canvasHeight,[{percent:0,color:"#489EDB"},{percent:.25,color:"#2DCBDC"},{percent:.5,color:"#8048DB"},{percent:.75,color:"#4870DB"},{percent:1,color:"#25DBA1"}]);
 	// keep a reference to the analyser node
 	analyserNode = analyserNodeRef;
 	// this is the array where the analyser data will be stored
 	audioData = new Uint8Array(analyserNode.fftSize/2);
 }
 
+class CircleSprites{
+    static type = "arc"; // demoing a static (class) variable here
+    constructor(x, y, range){
+        this.x = x;
+        this.y = y;
+        this.range = range;
+        //this.color = `rgb(${0}, ${0-128}, ${255-0})`;;
+        this.radius = utils.getRandom(2, 6);
+        this.startAngle = 0;
+        this.endAngle = Math.PI * 2;
+    }
+    
+    update(){
+        this.xDraw = utils.getRandom(this.x-this.range/2, this.x+this.range/2);
+        this.yDraw = utils.getRandom(this.y-this.range/2, this.y+this.range/2);
+        this.radius = utils.getRandom(2, 6);
+
+    }
+    
+    draw(ctx){
+        drawArc(ctx, this.xDraw, this.yDraw, this.radius, this.color, this.startAngle, this.endAngle);
+
+    }
+}
+
+const drawArc = (ctx,x,y,radius,fillStyle,lineWidth,strokeStyle,startAngle = 0,endAngle = Math.PI * 2) => {
+    ctx.save();
+    //ctx.fillStyle = fillStyle;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, startAngle, endAngle);
+    ctx.fill();
+    if(lineWidth >0){
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = strokeStyle;
+        ctx.stroke();
+    }
+    ctx.closePath();
+    ctx.restore();
+}
+
+const circSprite = new CircleSprites(50, 50, 50);
+const circSprite2 = new CircleSprites(800-50, 50, 50);
+    //console.log("circles generated");
+
 const draw = (params={}) => {
-  // 1 - populate the audioData array with the frequency data from the analyserNode
+  // 1 - populate the audioData array with the frequency data from the analyserNode//
 	// notice these arrays are passed "by reference" 
 	analyserNode.getByteFrequencyData(audioData);
 	// OR
@@ -46,17 +93,19 @@ const draw = (params={}) => {
     ctx.globalApha = .1;
     ctx.fillRect(0,0,canvasWidth, canvasHeight);
     ctx.restore();
+
+    
 	
-    if(!main.visualization){
+    if(main.visualization){
         //div.style.visibility = 'visible';
         // 3 - draw gradient
-        if(params.showGradient){
-            ctx.save();
-            ctx.fillStyle = gradient;
-            ctx.globalApha = .3;
-            ctx.fillRect(0,0,canvasWidth, canvasHeight);
-            ctx.restore();
-        }
+        // if(params.showGradient){
+        //     // ctx.save();
+        //     // ctx.fillStyle = gradient;
+        //     // ctx.globalApha = .3;
+        //     // ctx.fillRect(0,0,canvasWidth, canvasHeight);
+        //     // ctx.restore();
+        // }
         // 4 - draw bars
         if(params.showBars){
             let barSpacing = 4;
@@ -67,10 +116,12 @@ const draw = (params={}) => {
             let topSpacing = 100;
 
             ctx.save()
-            ctx.fillStyle = `rgba(255, 255, 255, 0.5)`;
+            
             ctx.strokeStyle = `rgba(0, 0, 0, 0, .5)`;
             //loop through data and draw
             for(let i = 0; i<audioData.length; i++){
+
+                ctx.fillStyle = utils.makeColor(156-audioData[i], 256-Math.round(audioData[i]/2), 256-audioData[i], .5);
                 ctx.fillRect(margin + i * (barWidth + barSpacing), topSpacing + 256-audioData[i], barWidth, barHeight);
                 ctx.strokeRect(margin + i * (barWidth + barSpacing), topSpacing + 256-audioData[i], barWidth, barHeight);
             }
@@ -85,24 +136,28 @@ const draw = (params={}) => {
             for(let i = 0; i<audioData.length; i++){
                 //red  
                 let percent = audioData[i] / 255;
+                ctx.strokeStyle = "teal";
 
                 let circleRadius = percent * maxRadius;
                 ctx.beginPath();
-                ctx.fillStyle = utils.makeColor(124, 223, 208, .34 - percent/3.0);
+                ctx.strokeStyle = utils.makeColor(124, 223, circleRadius*4, .34 - percent/3.0);
                 ctx.arc(canvasWidth/2, canvasHeight/2, circleRadius, 0, 2*Math.PI, false);
-                ctx.fill();
+                //ctx.fill();
+                ctx.stroke();
                 ctx.closePath();
                 //blue, bigger, transparent
                 ctx.beginPath();
-                ctx.fillStyle = utils.makeColor(87, 41, 117 , .1 - percent/10.0);
+                ctx.fillStyle = utils.makeColor(87, 41, circleRadius*5 , .1 - percent/10.0);
                 ctx.arc(canvasWidth/2, canvasHeight/2, circleRadius * 1.5, 0, 2*Math.PI, false);
-                ctx.fill();
+                //ctx.fill();
+                ctx.stroke();
                 ctx.closePath();
                 //yelow smaller
                 ctx.beginPath();
-                ctx.fillStyle = utils.makeColor(13, 156, 218, .5 - percent/5.0);
+                ctx.fillStyle = utils.makeColor(13, 156, circleRadius*.5, .5 - percent/5.0);
                 ctx.arc(canvasWidth/2, canvasHeight/2, circleRadius * .50, 0, 2*Math.PI, false);
-                ctx.fill();
+                //ctx.fill();
+                ctx.stroke();
                 ctx.closePath();
             }
             ctx.restore();
@@ -155,18 +210,27 @@ const draw = (params={}) => {
 
         // D) copy image data back to canvas
         ctx.putImageData(imageData, 0, 0);
+
+        for(let b of audioData){
+            ctx.save();
+            ctx.fillStyle = `rgb(${b/12}, ${82-b}, ${b})`;
+            circSprite.update();
+            circSprite.draw(ctx);
+            circSprite2.update();
+            circSprite2.draw(ctx);
+            ctx.restore();
+        }
     }
     else{
         //div.style.visibility = 'hidden';
 
         ctx.fillStyle = "rgba(0,0,0,.1)";
-		ctx.fillRect(0,0,ctx.canvas.width, ctx.canvas.height);
+		ctx.fillRect(0,0,canvasWidth, canvasHeight);
 		
 		//bars
 		ctx.fillStyle = "red";
 		ctx.save();
-		ctx.translate(320, MIDDLE_Y-120);
-        console.log("x: "+ctx.x + "y: " + ctx.y)
+		ctx.translate(360, MIDDLE_Y-100);
 		for(let b of audioData){
 			let percent = b/225;
 			if(percent<.02) percent = .02;
@@ -185,19 +249,30 @@ const draw = (params={}) => {
 		ctx.save();
 		ctx.strokeStyle = "white";
 		ctx.lineWidth = 3;
-		let x = -(ctx.canvasWidth/audioData.length);
-		let y = MIDDLE_Y + 200;
+		let x = -(canvasWidth/audioData.length);
+		let y = MIDDLE_Y+180;
 		ctx.beginPath();
 		ctx.moveTo(x, y);
 		for(let b of audioData){
 			ctx.lineTo(x,y-b);
-			x += (ctx.canvas.width/(audioData.length-10));
+			x += (canvasWidth/(audioData.length-10));
 		}
 		ctx.stroke();
 		ctx.closePath();
 		ctx.restore();
+
+        for(let b of audioData){
+            ctx.save();
+            ctx.fillStyle = `rgb(${b}, ${b-128}, ${255-b})`;
+            circSprite.update();
+            circSprite.draw(ctx);
+            circSprite2.update();
+            circSprite2.draw(ctx);
+            ctx.restore();
+        }
     }
 	
+    
     
 
     

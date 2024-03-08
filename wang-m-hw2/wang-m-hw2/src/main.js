@@ -11,21 +11,47 @@ import * as audio from './audio.js';
 import * as utils from './utils.js';
 import * as canvas from './canvas.js';
 
-const drawParams = {
-  showGradient : true,
-  showBars : true,
-  showCircles : true,
+let drawParams = {
+  showGradient : false,
+  showBars : false,
+  showCircles : false,
   showNoise : false,
   showInvert : false,
   showEmboss : false
 };
 
 let visualization = true;
+const fps = 60;
 
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
 	sound1  :  "media/New Adventure Theme.mp3"
 });
+
+
+const loadJSON = (url, callback) => {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = callback;
+  xhr.onerror = e => console.log(`In onerror = HTTP Status Code = ${e.target.status}`);
+  xhr.open("GET",url);
+  xhr.send();
+}
+
+const JSONLoaded = (e) => {
+  //console.log(`In onload = HTTP Status Code = ${e.target.status}`);
+  const xml = e.target.responseText;
+  const json = JSON.parse(xml);
+  
+  //words1 = json.words1;
+
+  //drawParams.showGradient = json.uiInitialState.showGradient;
+  drawParams.showBars = json.uiInitialState.showBars;
+  drawParams.showCircles = json.uiInitialState.showCircles;
+  drawParams.showNoise = json.uiInitialState.showNoise;
+  drawParams.showInvert = json.uiInitialState.showInvert;
+  drawParams.showEmboss = json.uiInitialState.showEmboss;
+
+}
 
 const init = () => {
 	console.log("init called");
@@ -33,6 +59,9 @@ const init = () => {
   audio.setupWebaudio(DEFAULTS.sound1);
 	let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
 	canvas.setupCanvas(canvasElement,audio.analyserNode);
+  
+
+  loadJSON("data/ac-data.json", JSONLoaded);
   setupUI(canvasElement);
 }
 
@@ -72,7 +101,7 @@ const setupUI = (canvasElement) => {
       e.target.dataset.playing = "no"
     }
 
-    document.querySelector("#gradient-cb").onclick = (e) => {drawParams.showGradient = e.target.checked;}
+    //document.querySelector("#gradient-cb").onclick = (e) => {drawParams.showGradient = e.target.checked;}
 
     document.querySelector("#bars-cb").onclick = (e) => {drawParams.showBars = e.target.checked;}
 
@@ -134,7 +163,7 @@ const setupUI = (canvasElement) => {
 
 const loop = () => {
   // /* NOTE: This is temporary testing code that we will delete in Part II */
-     requestAnimationFrame(loop);
+  setTimeout(loop, 1000/fps);
 
 
   canvas.draw(drawParams);
