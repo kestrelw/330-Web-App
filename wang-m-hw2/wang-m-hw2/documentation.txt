@@ -1,0 +1,18 @@
+I. .....I guess there is no I?
+II. Audio Effect nodes
+    a. Pretty basic...Added the trebble and base node amplifiers when checked. They hurt my ears...
+III. Sprite
+    a. name: CircleSprites (it is in canvas)
+    b. look & visualization: A chaotic sort of bubble blob with multiple radii that has varying fills to match the audio when play is hit
+IV. JSON
+    a. Contained checkmark data for which checkmarks would be auto selected on load
+V. Aesthetics
+    a. Changes made
+        i. Canvas was centered and rounded for a softer appearance
+        ii. Buttons, dropdowns, and backdrops have rounded boarders
+        iii. Buttons have a hover affect that color shifts and changes text for visibility
+        iii. Accent colors were made to match
+        vi. gradient was removed to keep black background
+        v. Color of wave bars changes based on height/audio
+        vi. circles color shift slightly off of circle radius and are stroke based rather then fill based
+    b. grade: 8%? I spent more time adjusting surrounding page format compared to the core audio visualization. Although They changes are not drastic it creates a general cohesive look across the UI.

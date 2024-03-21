@@ -1,0 +1,28 @@
+{
+    "appTitle": "My Audio Visualizer App",
+    "audioFiles": [
+      {
+        "fileName": "New Adventure Theme.mp3",
+        "trackName": "New Adventure Theme"
+      },
+      {
+        "fileName": "Peanuts Theme.mp3",
+        "trackName": "Peanuts Theme"
+      },
+      {
+        "fileName": "The Picard Song.mp3",
+        "trackName": "The Picard Song"
+      }
+    ],
+    "uiInitialState": {
+      "volume": 50,
+      "visualizationType": "Waveform",
+      "showGradient" : true,
+      "showBars" : true,
+      "showCircles" : true,
+      "showNoise" : false,
+      "showInvert" : false,
+      "showEmboss" : false
+
+    }
+  }
