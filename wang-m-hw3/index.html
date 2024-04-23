@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Audio Visualizer</title>
+  <link href="./styles/default-styles.css" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+</head>
+<body class="is-family-sans-serif">
+
+  <nav class="navbar has-shadow is-white">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="home.html">
+        <i class="fa fa-circle"></i><!-- I LITERALLY CANT GET OTHER ONES TO WORK -->
+      </a>
+      <a class="navbar-burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="nav-links">
+      <div class="navbar-start">
+        <a class="navbar-item" href="about.html">
+          About
+        </a>
+      
+        <a class="navbar-item is-hoverable" href="index.html">
+          App
+        </a>
+      
+        <!-- <a class="navbar-item is-hoverable" href="favorites.html">
+          Favorites
+        </a> -->
+      
+        <a class="navbar-item is-hoverable" href="documentation.txt">
+          Documentation
+        </a>
+      </div> <!-- end navbar-start -->
+    </div>
+  </nav>
+
+  <main class="has-background-dark box">
+    <div class="columns is-vcentered">
+      <div class="column">  
+        <div class="is-large is-primary p-2">
+          <!-- <div class="has-background-dark">
+            <p class="title">
+              Converted Ultimate Audio Visualizer
+            </p>
+            <p class="subtitle">
+              Pulsey audio visualization assignment hw.
+            </p>
+            <img class="p-3" style="float:right;width:50%" src="media/Audio-Waveforms-Featued-Image.png" alt="soundwave">
+          </div>
+          <div class="hero-footer">Contact: myw4072@rit.edu</div>
+          -->
+          <section class="columns is-centered">
+           <canvas width="800" height="400" class="box has-background-black my-3" ></canvas>
+          </section>
+          <div id="controls">
+          <section id = "buttons" class="columns is-centered">
+            <button id="play-button" class="button mx-2" data-playing="no"></button>
+            <button id="fs-button" class="button mx-2">Full Screen</button>
+          </section>
+          
+          <section id = "track" class="is-vcentered box">
+            <label>Track: 
+              <select id="track-select">
+                <option value="media/New Adventure Theme.mp3" selected>New Adventure Theme</option>
+                <option value="media/Peanuts Theme.mp3">Peanuts Theme</option>
+                <option value="media/The Picard Song.mp3">The Picard Song</option>
+              </select>
+            </label>
+
+            <label>Audio Visualization: 
+              <select id="visual-select">
+                <option selected>Frequency Data</option>
+                <option >Waveform</option>
+              </select>
+            </label>
+          </section>
+          
+          <section id="volume" class="is-vcentered box">
+            Volume: <input type="range" id="volume-slider" min="0" max="2" value="1" step="0.01">
+            <span id="volume-label">???</span>
+          </section>
+
+          <section id="visualization-options" class="is-vcentered box">
+            <!-- <span><input type="checkbox" id="gradient-cb" checked><label for="gradient-cb">Show Gradient</label></span> -->
+            <span><input type="checkbox" id="bars-cb" checked><label for="bars-cb">Show Bars</label></span>
+            <span><input type="checkbox" id="circles-cb" checked><label for="circles-cb">Show Circles</label></span>
+            <!-- we'll use this 4th checkbox soon! -->
+            <span><input type="checkbox" id="noise-cb"><label for="noise-cb">Show Noise</label></span>
+            <span><input type="checkbox" id="invert-cb"><label for="invert-cb">Invert Colors</label></span>
+            <span><input type="checkbox" id="emboss-cb"><label for="emboss-cb">Show Emboss</label></span>
+            
+            <p>
+              <span><input type="checkbox" id="cb-highshelf"><label for="cb-highshelf">Highshelf Filter (Treble)</label></span>
+              <span><input type="checkbox" id="cb-lowshelf"><label for="cb-lowshelf">Lowshelf Filter (Bass)</label></span>
+              <!-- <span><label for="cb-distortion">Distortion</label><input type="checkbox" id="cb-distortion"></span>-->
+              <!-- <span>0 <input type="range" min="0" max="100" value="0" id="slider-distortion"> 100</span>-->
+            </p>
+          </section>
+
+      
+    </div>
+        </div>
+      </div>
+    </div>
+
+
+    
+    
+  </main>
+
+  <script src="dist/bundle.js"></script>
+  <script src="./hamburger.js"></script>
+
+</body>
+</html>

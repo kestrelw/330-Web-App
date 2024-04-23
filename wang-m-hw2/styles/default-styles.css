@@ -1,0 +1,130 @@
+/* body {
+  background: #eeeeee;
+  font-family: tahoma, verdana, sans serif;
+} */
+
+/* main{
+  padding: 40px;
+  border-style: double;
+  border: solid "black";
+  border-radius: 25px;
+  background: rgb(49, 49, 49);
+} */
+
+/* canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: block;
+  width: 800px;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+
+  border: solid "black";
+  border-radius: 16px;
+
+  background: #fafafa;
+} */
+
+/* #controls{
+  margin: auto;
+} */
+
+
+/* section{
+  margin-bottom: 1rem;
+} */
+
+/* #playButton{
+  font-size: 1.2rem;
+  width: 6rem;
+} */
+
+/* #buttons{
+  text-align: center;
+} */
+
+/* button{
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  border: 1px solid black;
+  color: rgb(27, 27, 27);
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+} */
+
+button:hover {
+  background-color: #1a1a1a;
+  color: rgb(240, 240, 240);
+}
+
+button[data-playing="yes"]:after{
+  content: "Pause";
+}
+
+button[data-playing="no"]:after{
+  content: "Play";
+}
+
+/* #fsButton{
+  font-size: 1.2rem;
+  width: 8rem;
+} */
+
+/* #track{
+  border: solid "black";
+  margin-left: auto;
+  margin-right: autopx;
+  border-radius: 8px;
+  background-color: white;
+  padding: 14px;
+} */
+
+/* select{
+  border-radius: 8px;
+  font-size: 16px;
+} */
+
+/* #volume{
+  border: solid "black";
+  margin-left: auto;
+  margin-right: autopx;
+  border-radius: 8px;
+  background-color: white;
+  padding: 14px;
+} */
+
+/* #volumeLabel{
+  margin: auto;
+} */
+
+/* #visualization-options{
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  padding: 12px;
+} */
+
+/* 
+span{
+  margin-right:2em;
+} */
+
+/* #slider-distortion{
+  position:relative;top:.7em;
+} */
+
+/* input{
+  accent-color: #242324;
+} */
+
+/* *{
+  font-family: tahoma, verdana, sans serif;
+} */

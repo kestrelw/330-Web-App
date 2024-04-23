@@ -1,0 +1,21 @@
+HW 3 Documentation
+
+The program was coded in typescript.
+
+Code changes
+- Imports were altered
+- DrawParams interface created and moved to seperate script
+- Created consts and added type assertions
+- Even more consts created
+- Variable type conversions
+- Fixed audio.ts
+- Add many many stongly typed variables across all files (a few are missing due to not being able to find the right one)
+- Defaults enum
+- DrawParams external file
+- External sprite class created and imported/exported
+
+- Did not figure out what to put in colorstop. file is created and imported but not used.
+- burger.js is still js. Could not make work as a .ts
+- Did not find code in need of destructuring as there was not large groups of variables being subed in except for color selections.
+
+I'm not really sure how much detail was wanted for this....
