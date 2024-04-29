@@ -40,25 +40,29 @@ const deleteParkNameData = (name, id) => {
   
 const favoritesChanged = (snapshot) => {
 // TODO: clear #favoritesList
-    favList.innerHTML = "";
-    snapshot.forEach(fav => {
-        const childKey = fav.key;
-        const childData = fav.val();
-        console.log(childKey,childData);
-        // TODO: update #favoritesList
+    if(favList != null){
+        favList.innerHTML = "";
+        snapshot.forEach(fav => {
+            const childKey = fav.key;
+            const childData = fav.val();
+            console.log(childKey,childData);
+            // TODO: update #favoritesList
+            
+                const newPark = document.createElement("a");
+                newPark.className = "panel-block";
+                newPark.innerHTML = `<span class="panel-icon"><i class="fas fa-map-pin"></i></span>${childKey} (${childData.id}) - Likes: ${childData.likes}`;
+                favList.appendChild(newPark);
+            
+            
 
-        const newPark = document.createElement("a");
-        newPark.className = "panel-block";
-        newPark.innerHTML = `<span class="panel-icon"><i class="fas fa-map-pin"></i></span>${childKey} (${childData.id}) - Likes: ${childData.likes}`;
-        favList.appendChild(newPark);
-
-        //     favList.appendChild(`<a class="panel-block">
-    //     <span class="panel-icon">
-    //         <i class="fas fa-map-pin"></i>
-    //     </span>
-    //     Stoneybrook State Park
-    // </a>`);
-    });
+            //     favList.appendChild(`<a class="panel-block">
+        //     <span class="panel-icon">
+        //         <i class="fas fa-map-pin"></i>
+        //     </span>
+        //     Stoneybrook State Park
+        // </a>`);
+        });
+    }
 };
   
 const init = () => {
