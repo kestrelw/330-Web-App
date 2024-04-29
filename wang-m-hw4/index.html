@@ -9,7 +9,8 @@
 	<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
 	<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="styles/default-styles.css">
-	<script src="./src/main.js" type="module"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+	<title>Storage List</title>	<script src="./src/main.js" type="module"></script>
 </head>
 <body>
   <header class="hero is-small is-info is-bold p-2">
@@ -49,7 +50,8 @@
 					USA @ Zoom 3
 				</a>
 			</div> <!-- end panel 1-->
-			<div class="panel">begin panel 2
+			<!-- begin panel 2 -->
+			<div class="panel">
 				<h2 class="panel-heading">Favorites</h2>
 				<div id="favorites-list">
 					<a class="panel-block" id="p1">
@@ -73,7 +75,18 @@
 			<h2 id="details-1" class="panel-heading m-1">Info</h2>
 			<div class="columns m-1">
 				<div class="column is-one-third has-background-info-light mr-1">
-					<div id="details-2">???</div>
+					
+					<div id="details-2">Click on a park to learn about it.</div>
+					<div class="control">
+						<button id="btn-add" class="button is-success">
+						  Add to Favorites
+						  <span class = "material-symbols-outlined">Add</span>
+						</button>
+						<button id="btn-delete" class="button is-warning">
+						  Remove Favorite
+						  <span class = "material-symbols-outlined">Delete</span>
+						</button>
+					</div>
 				</div>
 				<div class="column has-background-info-light">
 					<h2 class="subtitle is-size-6 has-text-weight-bold mb-1">Park Details</h2>
