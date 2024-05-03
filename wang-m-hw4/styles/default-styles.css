@@ -34,3 +34,12 @@
 .control{
 	display: none;
 }
+
+#details-3 p{
+	margin-bottom: 1em !important;
+}
+
+#favorites-list{
+	height: 144px;
+	overflow: auto;
+}
