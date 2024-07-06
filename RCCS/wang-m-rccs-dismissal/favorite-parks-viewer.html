@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>HW-4 - NY State Park Buddy!</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=yes">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+	<title>Like List</title>	<script src="./src/parks-viewer.js" type="module"></script>
+</head>
+<body>
+	<header class="hero is-small is-info is-bold p-2">
+		<div class="hero-body">
+		<div class="container">
+			<h1 class="title">RCCS Dismissal Checkin</h1>
+			<h2 class="subtitle">Search by student name or ID</h2>
+		</div>
+		</div>
+	</header> 
+
+	<div class="field">
+		<!-- <p class="control has-icons-left"> -->
+		  <input class="input" type="text" placeholder="Student Name or ID">
+		  <!-- <span class="icon is-small is-left">
+			<i class="fas fa-lock"></i>
+		  </span>
+		</p> -->
+
+		<div class="select">
+			<select>
+				<option>All Grades</option>
+				<option>1st Grade</option>
+				<option>2nd Grade</option>
+				<option>3rd Grade</option>
+				<option>4th Grade</option>
+				<option>5th Grade</option>
+			</select>
+		  </div>
+	</div>
+
+	
+
+	<div class="columns m-1">
+		<div class="column">
+			<div class="panel">
+				<h2 class="panel-heading">Unreleased Students</h2>
+				<div id="student-unreleased-list">
+
+					<!-- Why wont button go right -->
+					<a class="panel-block">
+						<span class="panel-icon">
+							<i class="fas fa-map-pin"></i>
+						</span>
+						Nya nya nya
+
+						<span class="is-pulled-right">
+							<button id="btn-add" class="button is-success">
+								<span class = "material-symbols-outlined">Add</span>
+							</button>
+						</span>
+					</a>
+					
+					
+				</div>
+			 </div> <!-- end panel 2 -->
+		</div>
+	</div>
+
+	<div class="columns m-1 ">
+		<div class="column">
+			<div class="panel">
+				<h2 class="panel-heading has-background-warning">Released Students</h2>
+				<div class="has-background-warning-light" id="student-released-list">
+					
+				</div>
+			 </div> <!-- end panel 2 -->
+		</div>
+	</div>
+
+	
+</body>
+</html>
+<!-- test -->
